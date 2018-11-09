@@ -1,14 +1,6 @@
-import {
-  Environment,
-  Network,
-  RecordSource,
-  Store,
-} from 'relay-runtime';
+import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
-function fetchQuery(
-  operation,
-  variables,
-) {
+function fetchQuery(operation, variables) {
   return fetch('http://localhost:5000/graphql', {
     method: 'POST',
     headers: {
@@ -25,7 +17,7 @@ function fetchQuery(
 
 const environment = new Environment({
   network: Network.create(fetchQuery),
-  store: new Store(new RecordSource()),  
+  store: new Store(new RecordSource()),
 });
 
 export default environment;

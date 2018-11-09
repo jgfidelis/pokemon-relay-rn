@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, FlatList, StyleSheet } from 'react-native';
 import { createRefetchContainer, graphql } from 'react-relay';
 import type { RelayRefetchProp } from 'react-relay';
 
@@ -22,7 +22,6 @@ type State = {
 };
 
 class Home extends React.PureComponent<Props, State> {
-
   state = {
     isFetchingTop: false,
     isFetchingEnd: false,
@@ -31,7 +30,7 @@ class Home extends React.PureComponent<Props, State> {
 
   renderItem = ({ item }) => {
     return <PokemonRow pokemon={item.node} />;
-  }
+  };
 
   onRefresh = () => {
     const { isFetchingTop } = this.state;
@@ -100,11 +99,17 @@ class Home extends React.PureComponent<Props, State> {
     );
   };
 
+  renderFooter = () => {
+    const { isFetchingEnd } = this.state;
+    if (!isFetchingEnd) return null;
+    return <ActivityIndicator />
+  }
+
   render() {
     const { pokemons } = this.props.query;
     return (
       <View style={styles.container}>
-        <FlatList 
+        <FlatList
           data={pokemons.edges}
           renderItem={this.renderItem}
           keyExtractor={item => item.node.id}
@@ -114,9 +119,10 @@ class Home extends React.PureComponent<Props, State> {
           onRefresh={this.onRefresh}
           refreshing={this.state.refreshing}
           onEndReachedThreshold={0.3}
+          ListFooterComponent={this.renderFooter}
         />
       </View>
-    )
+    );
   }
 }
 
@@ -133,10 +139,8 @@ const HomeRefectContainer = createRefetchContainer(
   Home,
   {
     query: graphql`
-      fragment Home_query on Query
-        @argumentDefinitions(count: { type: "Int" }, cursor: { type: "String" }) {
-        pokemons(first: $count, after: $cursor)
-          @connection(key: "home_pokemons") {
+      fragment Home_query on Query @argumentDefinitions(count: { type: "Int" }, cursor: { type: "String" }) {
+        pokemons(first: $count, after: $cursor) @connection(key: "home_pokemons") {
           count
           pageInfo {
             hasNextPage

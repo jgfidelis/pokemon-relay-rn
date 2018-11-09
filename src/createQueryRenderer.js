@@ -38,7 +38,7 @@ export default function createQueryRenderer(
             //   return <ErrorView error={error} retry={retry} hideSplash={hideSplash} />;
             // }
             console.log('teste --- error: ', error);
-            console.log('teste query --- props: ', props)
+            console.log('teste query --- props: ', props);
 
             if (props) {
               return <FragmentComponent {...this.props} query={props} />;

@@ -5,23 +5,23 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import type { PokemonRow_pokemon } from './__generated__/PokemonRow_pokemon.graphql';
 
 type Props = {
- pokemon: PokemonRow_pokemon,
+  pokemon: PokemonRow_pokemon,
 };
 
 class PokemonRow extends React.PureComponent<Props> {
-  capitalizeFirstLetter = (string) => {
+  capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  };
 
-  hectogramToKg = (mass) => {
+  hectogramToKg = mass => {
     const kg = mass / 10;
     return kg.toFixed(1);
-  }
+  };
 
-  decimeterToMeter = (height) => {
+  decimeterToMeter = height => {
     const meter = height / 10;
     return meter.toFixed(1);
-  }
+  };
 
   render() {
     const { imageUrl, name, types, number, weight, height } = this.props.pokemon;
