@@ -1,0 +1,29 @@
+{
+  "name": "PokeApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "1.2.0",
+    "lodash": "^4.17.11",
+    "react": "^16.6.1",
+    "react-native": "0.57.4",
+    "react-relay": "^1.7.0"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "babel-plugin-relay": "^1.7.0",
+    "graphql": "^14.0.2",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.49.0",
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "relay-compiler": "^1.7.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
